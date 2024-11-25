@@ -1,17 +1,17 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useAuthStore } from "../store/authUser";
+import { useAuthStore } from "../store/authUser";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	// const { login, isLoggingIn } = useAuthStore();
+	const { login } = useAuthStore();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		// login({ email, password });
+		login({ email, password });
     console.log( email, password );
 	};
 

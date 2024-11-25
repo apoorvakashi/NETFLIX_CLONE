@@ -4,7 +4,6 @@ import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 export async function signup(req, res) {
     try {
-        console.log(req.body);
         const {email,password,username} = req.body;
         if (!email || !password || !username){
             return res.status(400).json({success:false, message:"All fields are required"})
@@ -63,7 +62,6 @@ export async function login(req, res) {
         if(!isPasswordCorrect){
             return res.status(400).json({success:false, message:"Invalid credentials"})
         }
-        console.log("Here")
         generateTokenAndSetCookie(res, user._id);
         res.status(201).json({success:true, user:{...user._doc, password:""}});
 
@@ -79,6 +77,16 @@ export async function logout(req, res) {
         
     } catch (error) {
         console.log("Error in logout controller : " + error.message);
+        res.status(500).json({success:false, message:"Internal Server Error"})
+    }
+}
+
+export async function authCheck(req, res) {
+    try {
+        res.status(200).json({success:true, user:req.user});
+        
+    } catch (error) {
+        console.log("Error in authCheck controller : " + error.message);
         res.status(500).json({success:false, message:"Internal Server Error"})
     }
 }

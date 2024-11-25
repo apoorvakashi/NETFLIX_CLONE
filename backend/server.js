@@ -18,7 +18,7 @@ const PORT = ENV_VARS.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/movies", protectRoutes, movieRoutes)
+app.use("/api/v1/movie", protectRoutes, movieRoutes)
 app.use("/api/v1/tv", protectRoutes, tvRoutes)
 app.use("/api/v1/search", protectRoutes, searchRoutes)
 
